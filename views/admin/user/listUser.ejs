@@ -1,0 +1,105 @@
+<%- include('../../../layouts/admin/header'); -%> <% if (messages.flashMessage)
+{ %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong><%= messages.flashMessage %></strong>
+</div>
+<% } %>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Danh sách khách hàng</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="#modal-add-user">
+          Thêm khách hàng
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>#No</th>
+            <th>Avatar</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Quyền</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#No</th>
+            <th>Avatar</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Quyền</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% if(users) { %> <% for(let i = 0; i < users.length; i++) { %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td>
+              <img
+                src="<%= users[i].avatar %>"
+                alt="<%= users[i].name %>"
+                width="50"
+                height="50"
+              />
+            </td>
+            <td><%= users[i].name %></td>
+            <td><%= users[i].email %></td>
+            <td><%= users[i].phoneNumber %></td>
+            <td><%= users[i].address %></td>
+            <td><%= users[i].isAdmin ? 'admin' : 'user' %></td>
+            <td class="d-flex d-flex-column">
+              <button
+                class="btn btn-info btn-circle mx-1 js-btn-edit-user"
+                data-id="<%= users[i].id %>"
+              >
+                <i class="far fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-danger btn-circle mx-1 js-btn-delete-user"
+                data-id="<%= users[i].id %>"
+                data-toggle="modal"
+                data-target="#modal-del"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <% } %> <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- modal add -->
+<%- include('./addUser'); -%>
+<!-- end modal add -->
+
+<!-- modal edit -->
+<%- include('./editUser'); -%>
+<!-- end modal edit -->
+
+<%- include('../../../layouts/admin/footer'); -%>

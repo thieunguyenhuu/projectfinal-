@@ -1,0 +1,117 @@
+<%- include('../../../layouts/admin/header'); -%> <% if (messages.flashMessage)
+{ %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong><%= messages.flashMessage %></strong>
+</div>
+<% } %>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Danh sách sản phẩm</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="#modal-add-product">
+          Thêm sản phẩm
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>#No</th>
+            <th>Tên</th>
+            <th>Hình</th>
+            <th>Còn lại</th>
+            <th>Giá</th>
+            <th>Thể loại</th>
+            <th>Nhà sản xuất</th>
+            <th>Hiển thị</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#No</th>
+            <th>Tên</th>
+            <th>Hình</th>
+            <th>Còn lại</th>
+            <th>Giá</th>
+            <th>Thể loại</th>
+            <th>Nhà sản xuất</th>
+            <th>Hiển thị</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% if(products) { %> <% for(let i = 0; i < products.length; i++) { %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= products[i].name %></td>
+            <td>
+              <img
+                style="
+                  width: 250px;
+                  height: 120px;
+                  object-fit: cover;
+                  object-position: center;
+                "
+                src="/uploads/<%= products[i].images[0] %>"
+                alt="<%= products[i].name %>"
+              />
+            </td>
+            <td><%= products[i].inStock %></td>
+            <td><%= products[i].price %></td>
+            <td><%= products[i].Category.name %></td>
+            <td><%= products[i].Producer.name %></td>
+            <td class="text-center">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input js-update-product-active" id="product-<%= products[i].id %>" value="<%= products[i].id %>" <%= products[i].isActive ? "checked" : "" %> />
+                <label class="custom-control-label" for="product-<%= products[i].id %>"></label>
+              </div>
+            </td>
+            <td class="d-flex d-flex-column">
+              <button
+                class="btn btn-info btn-circle mx-1 js-btn-edit-product"
+                data-id="<%= products[i].id %>"
+              >
+                <i class="far fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-danger btn-circle mx-1 js-btn-delete-product"
+                data-id="<%= products[i].id %>"
+                data-toggle="modal"
+                data-target="#modal-del"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <% } %> <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- modal add -->
+<%- include('./addProduct'); -%>
+<!-- end modal add -->
+
+<!-- modal edit -->
+<%- include('./editProduct'); -%>
+<!-- end modal edit -->
+
+<%- include('../../../layouts/admin/footer'); -%>

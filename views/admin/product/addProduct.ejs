@@ -1,0 +1,124 @@
+<div
+  class="modal fade"
+  id="modal-add-product"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm sản phẩm</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form
+        action="/admin/add-product"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name">Tên sản phẩm</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Nhập tên sản phẩm"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inStock">Còn lại</label>
+              <input
+                type="number"
+                class="form-control"
+                name="inStock"
+                min="0"
+                placeholder="Nhập số lượng"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="categoryId">Thể loại</label>
+              <select class="custom-select" name="categoryId" required>
+                <option value="" selected disabled>Chọn thể loại</option>
+                <% categories.forEach(category => { %>
+                <option value="<%= category.id %>"><%= category.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="producerId">Nhà sản xuất</label>
+              <select class="custom-select" name="producerId" required>
+                <option value="" selected disabled>Chọn nhà sản xuất</option>
+                <% producers.forEach(producer => { %>
+                <option value="<%= producer.id %>"><%= producer.name %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="price">Giá</label>
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                placeholder="Nhập giá"
+                min="0"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="isActive">Trạng thái</label>
+              <select class="custom-select" name="isActive" required>
+                <option value="true" selected>Hiển thị</option>
+                <option value="false">Ẩn</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              placeholder="Nhập mô tả"
+              rows="5"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="images">Ảnh</label>
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control-file"
+                name="images"
+                id="images"
+                accept="image/*"
+                multiple
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Huỷ
+          </button>
+          <button type="submit" class="btn btn-success">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<%- include('../layouts/user/header'); -%>
+<!-- PAGE BANNER SECTION -->
+<div class="page-banner-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="page-banner-content">
+          <h1>Đăng nhập</h1>
+          <ul class="breadcrumb">
+            <li><a href="/">Trang chủ</a></li>
+            <li class="active">Đăng nhập</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE SECTION START -->
+<div class="page-section section pt-120 pb-120">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+        <div class="login-reg-form">
+          <form action="/login" method="POST">
+            <div class="row">
+              <% if (messages.error) { %>
+              <div class="col-xs-12">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong><%= messages.error %></strong>
+                </div>
+              </div>
+              <% } %> <% if (messages.registerSuccess) { %>
+              <div class="col-xs-12">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong><%= messages.registerSuccess %></strong>
+                </div>
+              </div>
+              <% } %>
+              <div class="col-xs-12 mb-20">
+                <label for="email">Email <span class="required">*</span></label>
+                <input name="email" id="email" type="email" required />
+              </div>
+              <div class="col-xs-12 mb-20">
+                <label for="password"
+                  >Mật khẩu <span class="required">*</span></label
+                >
+                <input name="password" id="password" type="password" required />
+              </div>
+              <div class="col-xs-12 mb-20">
+                <input
+                  value="Đăng nhập"
+                  name="login"
+                  class="inline"
+                  type="submit"
+                />
+              </div>
+              <div class="col-xs-12">
+                Chưa có tài khoản
+                <a href="/register" style="margin: 0 4px;">Đăng ký</a> ngay!
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../layouts/user/footer'); -%>

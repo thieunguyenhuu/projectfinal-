@@ -1,0 +1,87 @@
+<%- include('../../../layouts/admin/header'); -%> <% if (messages.flashMessage)
+{ %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong><%= messages.flashMessage %></strong>
+</div>
+<% } %>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Danh sách nhà sản xuất</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="#modal-add-producer">
+          Thêm nhà sản xuất
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>#No</th>
+            <th>Tên nhà sản xuất</th>
+            <th>Quốc gia</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#No</th>
+            <th>Tên nhà sản xuất</th>
+            <th>Quốc gia</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% if(producers) { %> <% for(let i = 0; i < producers.length; i++) {
+          %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= producers[i].name %></td>
+            <td><%= producers[i].country %></td>
+            <td class="d-flex d-flex-column">
+              <button
+                class="btn btn-info btn-circle mx-1 js-btn-edit-producer"
+                data-id="<%= producers[i].id %>"
+              >
+                <i class="far fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-danger btn-circle mx-1 js-btn-delete-producer"
+                data-id="<%= producers[i].id %>"
+                data-toggle="modal"
+                data-target="#modal-del"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <% } %> <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- modal add -->
+<%- include('./addProducer'); -%>
+<!-- end modal add -->
+
+<!-- modal edit -->
+<%- include('./editProducer'); -%>
+<!-- end modal edit -->
+
+<%- include('../../../layouts/admin/footer'); -%>

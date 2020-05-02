@@ -1,0 +1,83 @@
+<%- include('../../../layouts/admin/header'); -%> <% if (messages.flashMessage)
+{ %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong><%= messages.flashMessage %></strong>
+</div>
+<% } %>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Danh sách đánh giá</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>Điểm</th>
+            <th>Nội dung</th>
+            <th>Sản phẩm</th>
+            <th>Người</th>
+            <th>Ngày</th>
+            <th>Hiển thị</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Điểm</th>
+            <th>Nội dung</th>
+            <th>Sản phẩm</th>
+            <th>Người</th>
+            <th>Ngày</th>
+            <th>Hiển thị</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% if(ratings) { %> <% ratings.forEach(function(rating){ %>
+          <tr>
+            <td>
+              <%= rating.scores %>
+              <i class="fas fa-star text-warning"></i>
+            </td>
+            <td><%= rating.content %></td>
+            <td><%= rating.Product.name %></td>
+            <td><%= rating.User.name %></td>
+            <td><%= dateTimeFilter(rating.createdAt) %></td>
+            <td>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input js-update-rating-active" id="rating-<%= rating.id %>" value="<%= rating.id %>" <%= rating.isActive ? "checked" : "" %> />
+                <label class="custom-control-label" for="rating-<%= rating.id %>"></label>
+              </div>
+            </td>
+            <td>
+              <button
+                class="btn btn-danger btn-circle mx-1 js-btn-delete-rating"
+                data-id="<%= rating.id %>"
+                data-toggle="modal"
+                data-target="#modal-del"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <% }) %> <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('../../../layouts/admin/footer'); -%>

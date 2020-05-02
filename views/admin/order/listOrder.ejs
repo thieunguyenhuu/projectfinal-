@@ -1,0 +1,85 @@
+<%- include('../../../layouts/admin/header'); -%> <% if (messages.flashMessage)
+{ %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong><%= messages.flashMessage %></strong>
+</div>
+<% } %>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Danh sách đặt hàng</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>Mã đặt hàng</th>
+            <th>Người đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Ngày đặt</th>
+            <th>Cập nhật</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Mã đặt hàng</th>
+            <th>Người đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Ngày đặt</th>
+            <th>Cập nhật</th>
+            <th>Tuỳ chọn</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% if(orders) { %> <% orders.forEach(function(order){ %>
+          <tr>
+            <td>
+              <a href="#" class="js-btn-view-orderDetail" data-code="<%= order.code %>">
+                <%= order.code %>
+              </a>
+            </td>
+            <td><%= order.receiverName %></td>
+            <td><%= order.totalAmount %></td>
+            <td>
+              <span class="badge badge-<%= filterStatus(order.statusId) %>">
+                <%= order.OrderStatus.name %>
+              </span>
+            </td>
+            <td><%= dateTimeFilter(order.createdAt) %></td>
+            <td><%= dateTimeFilter(order.updatedAt) %></td>
+            <td>
+              <select class="custom-select js-select-change-orderstatus" data-id="<%= order.id %>">
+                <% orderStatuses.forEach(function(status) { %>
+                <option value="<%= status.id %>" <%= status.id === order.OrderStatus.id ? "selected" : "" %> ><%= status.name %></option>
+                <% }) %>
+              </select>
+            </td>
+          </tr>
+          <% }) %> <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- modal order detail -->
+<%- include('./orderDetail'); -%>
+<!-- end modal order detail -->
+
+<%- include('../../../layouts/admin/footer'); -%>
