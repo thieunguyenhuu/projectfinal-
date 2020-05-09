@@ -6,7 +6,8 @@
         <!-- Footer Widget -->
         <div class="footer-widget col-md-4 col-sm-6 col-xs-12 mb-40">
           <h5 class="widget-title">Về chúng tôi</h5>
-          <p> Kai Perfume là một cửa hàng bán nước hoa chuyên nghiệp, ở đây chúng tôi cung cấp tất cả các loại nước hoa trong nước và ngoài nước, với đội ngũ chuyên nghiệp chúng tôi sẵn sàng phục vụ quý khách 24/7. </p>
+          <p> Kai Perfume là một cửa hàng bán nước hoa chuyên nghiệp, ở đây chúng tôi cung cấp tất cả các loại nước hoa
+            trong nước và ngoài nước, với đội ngũ chuyên nghiệp chúng tôi sẵn sàng phục vụ quý khách 24/7. </p>
         </div>
 
         <!-- Footer Widget -->
@@ -76,6 +77,50 @@
   <script src="/javascripts/ajax-mail.js"></script>
   <!-- Main js -->
   <script src="/javascripts/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      loadCart()
+      function loadCart() {
+        $.ajax({
+          type: "GET",
+          url: "/carts",
+          success: function (res) {
+
+            $(".mini-cart-brief").empty()
+            $(".mini-cart-brief").append(res);
+            let count =$(".all-cart-product").attr("count-cart");
+            console.log("countL ",count)
+            $(".count_cart").html(count)
+          }
+        });
+      }
+      $(".add-to-cart").click(function (value) {
+        const id = $(this).attr("data-id")
+        $.ajax({
+          type: "GET",
+          url: "/cart/add/" + id,
+          success: function (res) {
+            if (res.success) {
+              loadCart();
+            }
+          }
+        });
+      });
+      $("body").on("click",".cart-delete", function (value) {
+        console.log("id dlete: ,")
+        const id = $(this).attr("data-id")
+        $.ajax({
+          type: "GET",
+          url: "/cart/delete/" + id,
+          success: function (res) {
+            if (res.success) {
+              loadCart();
+            }
+          }
+        });
+      });
+    });
+  </script>
 </footer>
 </body>
 

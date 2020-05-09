@@ -4,8 +4,8 @@
 <div class="home-slider-section section">
   <!-- Home Slider -->
   <div id="home-slider" class="slides">
-    <img src="images\slider\1.jpeg" alt="" title="#slider-caption-1" />
-    <img src="images\slider\2.jpeg" alt="" title="#slider-caption-2" />
+    <img src="img/slider/slide4.jpg" alt="" title="#slider-caption-1" />
+    <img src="img/slider/slide5.jpg" alt="" title="#slider-caption-2" />
   </div>
   <!-- Caption 1 -->
   <div id="slider-caption-1" class="nivo-html-caption">
@@ -13,19 +13,17 @@
       <div class="row">
         <div class="hero-slider-content col-sm-8 col-xs-12">
           <h1 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-            Awesome Dsr Chair
+            armani code ultimate
           </h1>
           <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, by injected
-            humour,
+            Anmani đã chuẩn bị ra mắt một loại nước hoa dành cho mùa thu, mang tên Armani Code Ultimate.
           </p>
           <a
             href="product-details.html"
             class="wow fadeInUp"
             data-wow-duration="1s"
             data-wow-delay="1.5s"
-            >shop now</a
+            >Mua ngay</a
           >
         </div>
       </div>
@@ -37,19 +35,17 @@
       <div class="row">
         <div class="hero-slider-content col-sm-8 col-xs-12">
           <h1 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-            Arc Floor Lamp
+            Khuyến mãi chào đón mùa hè 2020
           </h1>
           <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, by injected
-            humour,
+           Nhập mã DONHE2020 giảm 20% khi mua hàng tại KaiPerfume
           </p>
           <a
             href="product-details.html"
             class="wow fadeInUp"
             data-wow-duration="1s"
             data-wow-delay="1.5s"
-            >shop now</a
+            >Mua ngay</a
           >
         </div>
       </div>
@@ -98,12 +94,12 @@
               <a
                 href="#"
                 data-toggle="modal"
-                data-target="#quickViewModal"
+                data-target="#quickViewModal<%= product.id %>"
                 title="Xem nhanh"
                 ><i class="pe-7s-look"></i>Xem</a
               >
               <a href="#" title="Thêm vào giỏ hàng"
-                ><i class="pe-7s-cart"></i>Thêm vào giỏ hàng</a
+                ><i class="pe-7s-cart btn_them" ></i>Thêm vào giỏ hàng</a
               >
             </div>
           </div>
@@ -143,7 +139,8 @@
 <!-- PRODUCT SECTION END -->
 
 <!-- QUICK VIEW MODAL START-->
-<div id="quickViewModal" class="modal fade">
+<% if (products) { %> <% products.forEach(product => { %>
+<div id="quickViewModal<%= product.id %>" class="modal fade">
   <div class="container">
     <div class="modal-content row">
       <div class="modal-body">
@@ -151,64 +148,36 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <!-- QuickView Product Images -->
-        <div class="col-md-5 col-sm-6 col-xs-12 mb-40">
+        <div class="col-md-5 col-sm-6 col-xs-12 mb-40">	
           <!-- Tab panes -->
           <div class="tab-content mb-10">
-            <div class="pro-large-img tab-pane active" id="pro-large-img-1">
-              <img src="images\product\2.jpeg" alt="" />
-            </div>
-            <div class="pro-large-img tab-pane" id="pro-large-img-2">
-              <img src="images\product\1.jpeg" alt="" />
-            </div>
-            <div class="pro-large-img tab-pane" id="pro-large-img-3">
-              <img src="images\product\3.jpeg" alt="" />
-            </div>
-            <div class="pro-large-img tab-pane" id="pro-large-img-4">
-              <img src="images\product\4.jpeg" alt="" />
-            </div>
-            <div class="pro-large-img tab-pane" id="pro-large-img-5">
-              <img src="images\product\5.jpeg" alt="" />
-            </div>
+              <% if (product.images.length > 0) { %>
+                <% for( let i = 0; i < product.images.length; i++ ) { %>
+                    <div class="pro-large-img tab-pane <%= i === 0 ? "active" : "" %>" id="pro-large-img-<%= i %>">
+                        <img src="/uploads/<%= product.images[i] %>">
+                    </div>
+                <% } %>
+              <% } %>
           </div>
-          <!-- QuickView Product Thumbnail Slider -->
+          <!-- Single Product Thumbnail Slider -->
           <div class="pro-thumb-img-slider">
-            <div>
-              <a href="#pro-large-img-1" data-toggle="tab"
-                ><img src="images\product\2.jpeg" alt=""
-              /></a>
-            </div>
-            <div>
-              <a href="#pro-large-img-2" data-toggle="tab"
-                ><img src="images\product\1.jpeg" alt=""
-              /></a>
-            </div>
-            <div>
-              <a href="#pro-large-img-3" data-toggle="tab"
-                ><img src="images\product\3.jpeg" alt=""
-              /></a>
-            </div>
-            <div>
-              <a href="#pro-large-img-4" data-toggle="tab"
-                ><img src="images\product\4.jpeg" alt=""
-              /></a>
-            </div>
-            <div>
-              <a href="#pro-large-img-5" data-toggle="tab"
-                ><img src="images\product\5.jpeg" alt=""
-              /></a>
-            </div>
+            <% if (product.images.length > 0) { %>
+                <% for( let i = 0; i < product.images.length; i++ ) { %>
+                    <div><a href="#pro-large-img-<%= i %>" data-toggle="tab"><img src="/uploads/<%= product.images[i] %>"></a></div>
+                <% } %>
+              <% } %>
           </div>
-        </div>
+      </div>
         <!-- QuickView Product Details -->
         <div class="col-md-7 col-sm-6 col-xs-12 mb-40">
           <div class="product-details section">
             <!-- Title -->
-            <h1 class="title">DSR Eiffel chair</h1>
+            <h1 class="title"><%= product.name %> </h1>
             <!-- Price Ratting -->
             <div class="price-ratting section">
               <!-- Price -->
               <span class="price float-left"
-                ><span class="new">€ 120.00</span></span
+                ><span class="new"><%= product.price %></span></span
               >
               <!-- Ratting -->
               <span class="ratting float-right">
@@ -219,67 +188,31 @@
                 <i class="fa fa-star active"></i>
                 <span> (01 Customer Review)</span>
               </span>
+              <div class="section" style="margin-bottom: 34px;">
+                      <span style="margin-right: 12px;">Mã sản phẩm: <%= product.code %></span>
+                      <span>Còn trong kho: <%= product.inStock %></span>
+                  </div>
             </div>
             <!-- Short Description -->
             <div class="short-desc section">
-              <h5 class="pd-sub-title">Quick Overview</h5>
-              <p>
-                There are many variations of passages of Lorem Ipsum avaable, b
-                majority have suffered alteration in some form, by injected
-                humour, or randomised words which don't look even slightly
-                believable. make an ami jani na.
+              <h5 class="pd-sub-title">Mô tả</h5>
+              <p><%= product.description %> 
               </p>
-            </div>
-            <!-- Product Size -->
-            <div class="product-size section">
-              <h5 class="pd-sub-title">Select Size</h5>
-              <button>s</button>
-              <button class="active">m</button>
-              <button>x</button>
-              <button>xl</button>
-            </div>
-            <!-- Product Color -->
-            <div class="color-list section">
-              <h5 class="pd-sub-title">Select Color</h5>
-              <button class="active" style="background-color: #51bd99;">
-                <i class="fa fa-check"></i>
-              </button>
-              <button style="background-color: #ff7a5f;">
-                <i class="fa fa-check"></i>
-              </button>
-              <button style="background-color: #baa6c2;">
-                <i class="fa fa-check"></i>
-              </button>
-              <button style="background-color: #414141;">
-                <i class="fa fa-check"></i>
-              </button>
             </div>
             <!-- Quantity Cart -->
             <div class="quantity-cart section">
               <div class="product-quantity">
                 <input type="text" value="0" />
               </div>
-              <button class="add-to-cart">add to cart</button>
+              <button class="add-to-cart">Thêm giỏ hàng</button>
             </div>
-            <!-- Usefull Link -->
-            <ul class="usefull-link section">
-              <li>
-                <a href="#"><i class="pe-7s-mail"></i> Email to a Friend</a>
-              </li>
-              <li>
-                <a href="#"><i class="pe-7s-like"></i> Wishlist</a>
-              </li>
-              <li>
-                <a href="#"><i class="pe-7s-print"></i> print</a>
-              </li>
-            </ul>
+            
             <!-- Share -->
             <div class="share-icons section">
               <span>share :</span>
               <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-youtube"></i></a>
               <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-pinterest"></i></a>
             </div>
           </div>
         </div>
@@ -287,7 +220,9 @@
     </div>
   </div>
 </div>
+<% }) %> <% } %>  
 <!-- QUICK VIEW MODAL END-->
 
 <!-- FOOTER TOP SECTION START -->
+
 <%- include('../layouts/user/footer'); -%>
