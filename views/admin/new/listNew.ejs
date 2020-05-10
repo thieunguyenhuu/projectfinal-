@@ -1,3 +1,53 @@
 <%- include('../../../layouts/admin/header'); -%>
-  News
+<div class="card-header">
+  <ul class="nav nav-tabs card-header-tabs">
+    <li class="nav-item">
+      <a class="nav-link active">Danh sách bài viết</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" href="#modal-add-new">
+        Thêm bài viết
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Tiêu đề</th>
+            <th>Bài viết</th>
+            <th>Ảnh</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Tiêu đề</th>
+            <th>Bài viết</th>
+            <th>Ảnh</th>
+
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Garrett Winters</td>
+            <td>Accountant</td>
+            <td></td>
+          </tr>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- modal add -->
+<%- include('./addNew'); -%>
+<!-- end modal add -->
 <%- include('../../../layouts/admin/footer'); -%>

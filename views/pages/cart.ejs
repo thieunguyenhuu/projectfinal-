@@ -2,11 +2,11 @@
   <% if (result) { %> <% result.forEach(product => { %>
   <div class="single-cart clearfix">
     <div class="cart-image">
-      <a href="product-details.html"><img src="<%=product.image%>" alt="" /></a>
+      <img src="<%=product.image%>" alt="" />
     </div>
     <div class="cart-info">
       <h5>
-        <a href="product-details.html"><%= product.name%></a>
+      <%= product.name%>
       </h5>
       <p><%= product.qty%> x <%= product.price%></p>
       <a

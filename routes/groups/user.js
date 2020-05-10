@@ -28,7 +28,10 @@ router.get("/products/:slug", ProductController.show);
 // router.get("/checkout", function (req, res, next) {
 //   res.render("checkout", { title: "Checkout" });
 // });
-router.get("/checkout", isAuthenticated, CheckoutController.index);
+// router.get("/checkout", isAuthenticated, CheckoutController.index);
+router.get("/checkout", CheckoutController.index);
+router.post("/checkout", CheckoutController.create);
+
 //get cart page
 // router.get("/cart", function (req, res, next) {
 //   res.render("cart", { title: "cart" });
@@ -37,13 +40,10 @@ router.get("/carts", CartController.getAll);
 router.get("/cart/add/:id", CartController.addToCart);
 router.get("/cart/delete/:id", CartController.deleteCart);
 
-/* xử lý đăng ký */
-
-// app.post('/signup', passport.authenticate('local-signup', {
-//   successRedirect : '/profile', // Điều hướng tới trang hiển thị profile
-//   failureRedirect : '/signup', // Trở lại trang đăng ký nếu lỗi
-//   failureFlash : true
-// }));
+//profile
+router.get("/profile", function (req, res, next) {
+  res.render("profile", { title: "Profile" });
+});
 
 /* GET login page. */
 router.get("/news", function (req, res, next) {
@@ -53,10 +53,7 @@ router.get("/news", function (req, res, next) {
 router.get("/news/:slug", function (req, res, next) {
   res.render("newDetail", { title: "News Detail" });
 });
-//profile
-router.get("/profile", function (req, res, next) {
-  res.render("profile", { title: "Profile" });
-});
+
 //about
 router.get("/about", function (req, res, next) {
   res.render("about", { title: "About" });

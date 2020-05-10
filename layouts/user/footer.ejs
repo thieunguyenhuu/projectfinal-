@@ -79,47 +79,47 @@
   <script src="/javascripts/main.js"></script>
   <script>
     $(document).ready(function () {
-      loadCart()
-      function loadCart() {
-        $.ajax({
-          type: "GET",
-          url: "/carts",
-          success: function (res) {
+  loadCart()
+  function loadCart() {
+    $.ajax({
+      type: "GET",
+      url: "/carts",
+      success: function (res) {
 
-            $(".mini-cart-brief").empty()
-            $(".mini-cart-brief").append(res);
-            let count =$(".all-cart-product").attr("count-cart");
-            console.log("countL ",count)
-            $(".count_cart").html(count)
-          }
-        });
+        $(".mini-cart-brief").empty()
+        $(".mini-cart-brief").append(res);
+        let count =$(".all-cart-product").attr("count-cart");
+        console.log("countL ",count)
+        $(".count_cart").html(count)
       }
-      $(".add-to-cart").click(function (value) {
-        const id = $(this).attr("data-id")
-        $.ajax({
-          type: "GET",
-          url: "/cart/add/" + id,
-          success: function (res) {
-            if (res.success) {
-              loadCart();
-            }
-          }
-        });
-      });
-      $("body").on("click",".cart-delete", function (value) {
-        console.log("id dlete: ,")
-        const id = $(this).attr("data-id")
-        $.ajax({
-          type: "GET",
-          url: "/cart/delete/" + id,
-          success: function (res) {
-            if (res.success) {
-              loadCart();
-            }
-          }
-        });
-      });
     });
+  }
+  $(".add-to-cart").click(function (value) {
+    const id = $(this).attr("data-id")
+    $.ajax({
+      type: "GET",
+      url: "/cart/add/" + id,
+      success: function (res) {
+        if (res.success) {
+          loadCart();
+        }
+      }
+    });
+  });
+  $("body").on("click",".cart-delete", function (value) {
+    console.log("id dlete: ,")
+    const id = $(this).attr("data-id")
+    $.ajax({
+      type: "GET",
+      url: "/cart/delete/" + id,
+      success: function (res) {
+        if (res.success) {
+          loadCart();
+        }
+      }
+    });
+  });
+});
   </script>
 </footer>
 </body>

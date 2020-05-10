@@ -1,6 +1,12 @@
 <%- include('../layouts/user/header'); -%>
 <!-- END HEADER SECTION -->
 <!-- START SLIDER SECTION -->
+<% if (messages.flashMessage)
+{ %>
+  <script>
+    alert(messages.flashMessage)
+  </script>
+<% } %>
 <div class="home-slider-section section">
   <!-- Home Slider -->
   <div id="home-slider" class="slides">
@@ -19,7 +25,7 @@
             Anmani đã chuẩn bị ra mắt một loại nước hoa dành cho mùa thu, mang tên Armani Code Ultimate.
           </p>
           <a
-            href="product-details.html"
+            href="/products"
             class="wow fadeInUp"
             data-wow-duration="1s"
             data-wow-delay="1.5s"
@@ -41,7 +47,7 @@
            Nhập mã DONHE2020 giảm 20% khi mua hàng tại KaiPerfume
           </p>
           <a
-            href="product-details.html"
+            href="/products"
             class="wow fadeInUp"
             data-wow-duration="1s"
             data-wow-delay="1.5s"
@@ -98,7 +104,7 @@
                 title="Xem nhanh"
                 ><i class="pe-7s-look"></i>Xem</a
               >
-              <a href="#" title="Thêm vào giỏ hàng"
+              <a href="/products/<%= product.slug %>" title="Thêm vào giỏ hàng"
                 ><i class="pe-7s-cart btn_them" ></i>Thêm vào giỏ hàng</a
               >
             </div>

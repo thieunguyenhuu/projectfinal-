@@ -726,7 +726,7 @@ textarea:focus {
   z-index: 1;
 }
 .page-banner-content::before {
-  border: 25px solid #f9f9fa;
+  border: 25px solid #999999;
   content: "";
   height: 155px;
   left: 0;
